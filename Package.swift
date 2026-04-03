@@ -17,6 +17,10 @@ let package = Package(
             targets: ["Sample Primitives"]
         ),
         .library(
+            name: "Sample Primitives Core",
+            targets: ["Sample Primitives Core"]
+        ),
+        .library(
             name: "Sample Primitives Test Support",
             targets: ["Sample Primitives Test Support"]
         ),
