@@ -28,4 +28,4 @@ extension Sample {
 }
 
 extension Sample.Batch: Copyable where Element: Copyable {}
-extension Sample.Batch: @unchecked Sendable where Element: Sendable {}
+extension Sample.Batch: @unsafe @unchecked Sendable where Element: Sendable {}
