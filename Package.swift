@@ -12,6 +12,11 @@ let package = Package(
         .visionOS(.v26),
     ],
     products: [
+        // MARK: - Namespace
+        .library(
+            name: "Sample Namespace",
+            targets: ["Sample Namespace"]
+        ),
         .library(
             name: "Sample Primitives",
             targets: ["Sample Primitives"]
@@ -33,9 +38,15 @@ let package = Package(
         .package(path: "../swift-time-primitives"),
     ],
     targets: [
+        // MARK: - Namespace
+        .target(
+            name: "Sample Namespace",
+            dependencies: []
+        ),
         .target(
             name: "Sample Primitives Core",
             dependencies: [
+                "Sample Namespace",
                 .product(name: "Comparison Primitives", package: "swift-comparison-primitives"),
                 .product(name: "Ordering Primitives", package: "swift-ordering-primitives"),
                 .product(name: "Algebra Monoid Primitives", package: "swift-algebra-monoid-primitives"),
@@ -46,6 +57,7 @@ let package = Package(
         .target(
             name: "Sample Primitives",
             dependencies: [
+                "Sample Namespace",
                 "Sample Primitives Core",
             ]
         ),
