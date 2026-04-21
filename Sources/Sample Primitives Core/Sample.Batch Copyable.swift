@@ -2,7 +2,7 @@ extension Sample.Batch where Element: Copyable {
 
     /// Creates a batch from an array of values, sorted by the given comparator.
     @inlinable
-    public init(_ values: [Element], sortedBy comparator: Ordering.Comparator<Element>) {
+    public init(_ values: [Element], sortedBy comparator: Order.Comparator<Element>) {
         let sorted = values.sorted { comparator($0, $1).isLess }
         let count = sorted.count
         let pointer = UnsafeMutablePointer<Element>.allocate(capacity: Swift.max(count, 1))

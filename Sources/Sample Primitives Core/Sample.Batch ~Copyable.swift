@@ -7,12 +7,12 @@ extension Sample.Batch where Element: ~Copyable {
     ///
     /// - Parameters:
     ///   - count: The number of elements to produce.
-    ///   - comparator: Ordering comparator for sorting elements.
+    ///   - comparator: Order comparator for sorting elements.
     ///   - body: Closure called with each index `0..<count` to produce an element.
     @inlinable
     public init(
         count: Int,
-        sortedBy comparator: Ordering.Comparator<Element>,
+        sortedBy comparator: Order.Comparator<Element>,
         initializingWith body: (Int) -> Element
     ) {
         let pointer = UnsafeMutablePointer<Element>.allocate(capacity: Swift.max(count, 1))
@@ -67,7 +67,7 @@ extension Sample.Batch where Element: ~Copyable {
     static func _insertionSort(
         _ base: UnsafeMutablePointer<Element>,
         count: Int,
-        comparator: Ordering.Comparator<Element>
+        comparator: Order.Comparator<Element>
     ) {
         guard count > 1 else { return }
         for i in 1..<count {

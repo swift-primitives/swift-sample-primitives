@@ -32,7 +32,7 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../swift-comparison-primitives"),
-        .package(path: "../swift-ordering-primitives"),
+        .package(path: "../swift-order-primitives"),
         .package(path: "../swift-algebra-monoid-primitives"),
         .package(path: "../swift-witness-primitives"),
         .package(path: "../swift-time-primitives"),
@@ -48,7 +48,7 @@ let package = Package(
             dependencies: [
                 "Sample Namespace",
                 .product(name: "Comparison Primitives", package: "swift-comparison-primitives"),
-                .product(name: "Ordering Primitives", package: "swift-ordering-primitives"),
+                .product(name: "Order Primitives", package: "swift-order-primitives"),
                 .product(name: "Algebra Monoid Primitives", package: "swift-algebra-monoid-primitives"),
                 .product(name: "Witness Primitives", package: "swift-witness-primitives"),
                 .product(name: "Time Primitives Core", package: "swift-time-primitives"),
