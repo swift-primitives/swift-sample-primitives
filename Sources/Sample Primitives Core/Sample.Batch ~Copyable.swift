@@ -1,3 +1,4 @@
+
 extension Sample.Batch where Element: ~Copyable {
 
     /// Creates a batch from elements produced by a closure, sorted by the given comparator.
