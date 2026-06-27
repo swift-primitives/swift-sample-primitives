@@ -1,3 +1,6 @@
+public import Sample_Averaging_Primitives
+public import Sample_Primitive
+
 extension Sample {
 
     /// Regression comparison between two batches.
@@ -29,6 +32,7 @@ extension Sample {
         /// Whether lower or higher values are better.
         public let polarity: Sample.Polarity
 
+        /// Creates a comparison of a baseline and current batch on the given metric and polarity.
         @inlinable
         public init(
             baseline: Sample.Batch<Element>,
@@ -53,7 +57,8 @@ extension Sample {
             using averaging: Sample.Averaging<Element>
         ) -> Double? {
             guard let baseValue = metric.extract(from: baseline, using: averaging),
-                  let curValue = metric.extract(from: current, using: averaging) else {
+                let curValue = metric.extract(from: current, using: averaging)
+            else {
                 return nil
             }
             let baseDouble = averaging.project(baseValue)

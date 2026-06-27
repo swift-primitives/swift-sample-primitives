@@ -1,5 +1,5 @@
-import Testing
 import Sample_Primitives
+import Testing
 
 @Suite
 struct SampleBatchMedianAbsoluteDeviationTests {

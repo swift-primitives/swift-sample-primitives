@@ -1,5 +1,5 @@
-import Testing
 import Sample_Primitives
+import Testing
 
 @Suite
 struct SampleAccumulatorTests {
@@ -67,13 +67,16 @@ struct SampleAccumulatorTests {
     @Test
     func monoidAssociativity() {
         var a = Sample.Accumulator.empty
-        a.record(1); a.record(2)
+        a.record(1)
+        a.record(2)
 
         var b = Sample.Accumulator.empty
-        b.record(3); b.record(4)
+        b.record(3)
+        b.record(4)
 
         var c = Sample.Accumulator.empty
-        c.record(5); c.record(6)
+        c.record(5)
+        c.record(6)
 
         let left = a.merged(with: b).merged(with: c)
         let right = a.merged(with: b.merged(with: c))
@@ -87,10 +90,12 @@ struct SampleAccumulatorTests {
     @Test
     func monoidCommutativity() {
         var a = Sample.Accumulator.empty
-        a.record(10); a.record(50)
+        a.record(10)
+        a.record(50)
 
         var b = Sample.Accumulator.empty
-        b.record(20); b.record(30)
+        b.record(20)
+        b.record(30)
 
         let ab = a.merged(with: b)
         let ba = b.merged(with: a)

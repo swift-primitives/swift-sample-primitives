@@ -1,3 +1,6 @@
+public import Sample_Averaging_Primitives
+public import Sample_Primitive
+
 extension Sample.Batch where Element: Copyable & Sendable {
 
     /// Computes the Median Absolute Deviation: median(|xi - median(X)|).
@@ -26,8 +29,9 @@ extension Sample.Batch where Element: Copyable & Sendable {
         if deviations.count % 2 == 1 {
             madDouble = deviations[deviations.count / 2]
         } else {
-            madDouble = (deviations[deviations.count / 2 - 1]
-                + deviations[deviations.count / 2]) / 2.0
+            madDouble =
+                (deviations[deviations.count / 2 - 1]
+                    + deviations[deviations.count / 2]) / 2.0
         }
         return averaging.embed(madDouble)
     }
@@ -47,7 +51,7 @@ extension Sample.Batch where Element: Copyable & Sendable {
         threshold k: Double = 3.0
     ) -> Int? {
         guard let med = median,
-              let mad = medianAbsoluteDeviation(using: averaging)
+            let mad = medianAbsoluteDeviation(using: averaging)
         else { return nil }
         let medianDouble = averaging.project(med)
         let madDouble = averaging.project(mad)

@@ -1,3 +1,5 @@
+public import Sample_Primitive
+
 extension Sample {
 
     /// Batch statistics over a sorted collection of elements.
@@ -19,13 +21,15 @@ extension Sample {
         @usableFromInline
         let _storage: _SampleBatchStorage<Element>
 
+        /// The number of elements in the batch.
         @inlinable
         public var count: Int { _storage.count }
 
+        /// Whether the batch contains no elements.
         @inlinable
         public var isEmpty: Bool { count == 0 }
     }
 }
 
 extension Sample.Batch: Copyable where Element: Copyable {}
-extension Sample.Batch: @unchecked Sendable where Element: Sendable {}
+extension Sample.Batch: @unsafe @unchecked Sendable where Element: Sendable {}

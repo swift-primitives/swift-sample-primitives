@@ -1,3 +1,7 @@
+public import Sample_Primitive
+@_exported public import Time_Primitive
+@_exported public import Witness_Primitives
+
 extension Sample {
 
     /// Value witness for computing statistics over a collection of elements.
@@ -32,6 +36,7 @@ extension Sample {
         /// Embed `Double` result back into the element type.
         public var embed: @Sendable (Double) -> Element
 
+        /// Creates an averaging witness from its zero, addition, division, projection, and embedding operations.
         @inlinable
         public init(
             zero: Element,

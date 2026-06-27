@@ -5,8 +5,8 @@
 //  Unit tests for OLS linear regression.
 //
 
-import Testing
 import Sample_Primitives
+import Testing
 
 @Suite
 struct SampleRegressionTests {

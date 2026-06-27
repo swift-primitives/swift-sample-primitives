@@ -1,3 +1,6 @@
+public import Sample_Averaging_Primitives
+public import Sample_Primitive
+
 extension Sample {
 
     /// Selector for named statistical metrics.

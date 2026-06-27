@@ -1,3 +1,6 @@
+@_exported public import Order_Primitives
+public import Sample_Primitive
+
 extension Sample.Batch where Element: ~Copyable {
 
     /// Creates a batch from elements produced by a closure, sorted by the given comparator.
@@ -7,12 +10,12 @@ extension Sample.Batch where Element: ~Copyable {
     ///
     /// - Parameters:
     ///   - count: The number of elements to produce.
-    ///   - comparator: Ordering comparator for sorting elements.
+    ///   - comparator: Order comparator for sorting elements.
     ///   - body: Closure called with each index `0..<count` to produce an element.
     @inlinable
     public init(
         count: Int,
-        sortedBy comparator: Ordering.Comparator<Element>,
+        sortedBy comparator: Order.Comparator<Element>,
         initializingWith body: (Int) -> Element
     ) {
         let pointer = UnsafeMutablePointer<Element>.allocate(capacity: Swift.max(count, 1))
@@ -36,6 +39,10 @@ extension Sample.Batch where Element: ~Copyable {
     ) -> R? {
         guard count > 0 else { return nil }
         let index = Int(Double(count) * p)
+        // reason: Last-index clamp `Swift.min(index, count − 1)` for percentile
+        // nearest-rank algorithm; `count` is stdlib Int (storage size). Math
+        // IS the length-minus-one expression.
+        // swiftlint:disable:next cardinal_count_minus_one_anti_pattern
         let clamped = Swift.min(index, count - 1)
         return unsafe body((self._storage.base + clamped).pointee)
     }
@@ -51,6 +58,10 @@ extension Sample.Batch where Element: ~Copyable {
     @inlinable
     public borrowing func withMax<R: ~Copyable>(_ body: (borrowing Element) -> R) -> R? {
         guard count > 0 else { return nil }
+        // reason: Pointer last-element access via `base + count − 1`; canonical
+        // pointer-arithmetic pattern for last element of a contiguous buffer.
+        // `count` is stdlib Int.
+        // swiftlint:disable:next cardinal_count_minus_one_anti_pattern
         return unsafe body((self._storage.base + count - 1).pointee)
     }
 
@@ -67,7 +78,7 @@ extension Sample.Batch where Element: ~Copyable {
     static func _insertionSort(
         _ base: UnsafeMutablePointer<Element>,
         count: Int,
-        comparator: Ordering.Comparator<Element>
+        comparator: Order.Comparator<Element>
     ) {
         guard count > 1 else { return }
         for i in 1..<count {

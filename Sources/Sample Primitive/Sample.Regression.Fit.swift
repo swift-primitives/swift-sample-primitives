@@ -33,6 +33,7 @@ extension Sample.Regression {
         /// Uses n-2 degrees of freedom (Bessel's correction for 2 parameters).
         public let meanSquaredError: Double
 
+        /// Creates a fit from the given slope, intercept, R², and mean squared error.
         public init(
             slope: Double,
             intercept: Double,

@@ -34,6 +34,7 @@ extension Sample {
             .init(count: 0, sum: 0, minimum: .max, maximum: 0)
         }
 
+        /// Creates an accumulator with the given count, sum, minimum, and maximum.
         @inlinable
         public init(count: UInt64, sum: UInt64, minimum: UInt64, maximum: UInt64) {
             self.count = count
