@@ -2,10 +2,10 @@ import Sample_Primitives
 import Testing
 
 @Suite
-struct SampleAccumulatorTests {
+struct `Sample Accumulator Tests` {
 
     @Test
-    func emptyAccumulator() {
+    func `empty accumulator`() {
         let acc = Sample.Accumulator.empty
         #expect(acc.count == 0)
         #expect(acc.sum == 0)
@@ -15,7 +15,7 @@ struct SampleAccumulatorTests {
     }
 
     @Test
-    func recordValues() {
+    func `record values`() {
         var acc = Sample.Accumulator.empty
         acc.record(10)
         acc.record(20)
@@ -28,7 +28,7 @@ struct SampleAccumulatorTests {
     }
 
     @Test
-    func singleRecord() {
+    func `single record`() {
         var acc = Sample.Accumulator.empty
         acc.record(42)
         #expect(acc.count == 1)
@@ -41,7 +41,7 @@ struct SampleAccumulatorTests {
     // MARK: - Monoid laws
 
     @Test
-    func monoidIdentityLeft() {
+    func `monoid identity left`() {
         var acc = Sample.Accumulator.empty
         acc.record(10)
         acc.record(20)
@@ -53,7 +53,7 @@ struct SampleAccumulatorTests {
     }
 
     @Test
-    func monoidIdentityRight() {
+    func `monoid identity right`() {
         var acc = Sample.Accumulator.empty
         acc.record(10)
         acc.record(20)
@@ -65,7 +65,7 @@ struct SampleAccumulatorTests {
     }
 
     @Test
-    func monoidAssociativity() {
+    func `monoid associativity`() {
         var a = Sample.Accumulator.empty
         a.record(1)
         a.record(2)
@@ -88,7 +88,7 @@ struct SampleAccumulatorTests {
     }
 
     @Test
-    func monoidCommutativity() {
+    func `monoid commutativity`() {
         var a = Sample.Accumulator.empty
         a.record(10)
         a.record(50)
@@ -107,7 +107,7 @@ struct SampleAccumulatorTests {
     }
 
     @Test
-    func monoidWitness() {
+    func `monoid witness`() {
         let monoid = Sample.Accumulator.monoid
 
         var a = Sample.Accumulator.empty

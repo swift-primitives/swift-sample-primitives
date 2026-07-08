@@ -9,15 +9,15 @@ import Sample_Primitives
 import Testing
 
 @Suite
-struct SampleRegressionTests {
+struct `Sample Regression Tests` {
 
     @Suite struct Unit {}
-    @Suite struct EdgeCase {}
+    @Suite struct `Edge Case` {}
 }
 
 // MARK: - Unit
 
-extension SampleRegressionTests.Unit {
+extension `Sample Regression Tests`.Unit {
 
     @Test
     func `perfect linear fit`() {
@@ -80,7 +80,7 @@ extension SampleRegressionTests.Unit {
 
 // MARK: - Edge Case
 
-extension SampleRegressionTests.EdgeCase {
+extension `Sample Regression Tests`.`Edge Case` {
 
     @Test
     func `minimum two points`() {

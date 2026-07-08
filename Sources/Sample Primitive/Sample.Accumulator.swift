@@ -28,12 +28,6 @@ extension Sample {
         /// Maximum recorded value, or `0` if empty.
         public var maximum: UInt64
 
-        /// The empty accumulator (identity element for the monoid).
-        @inlinable
-        public static var empty: Self {
-            .init(count: 0, sum: 0, minimum: .max, maximum: 0)
-        }
-
         /// Creates an accumulator with the given count, sum, minimum, and maximum.
         @inlinable
         public init(count: UInt64, sum: UInt64, minimum: UInt64, maximum: UInt64) {
@@ -42,32 +36,41 @@ extension Sample {
             self.minimum = minimum
             self.maximum = maximum
         }
+    }
+}
 
-        /// Records a single value.
-        @inlinable
-        public mutating func record(_ value: UInt64) {
-            count &+= 1
-            sum &+= value
-            minimum = Swift.min(minimum, value)
-            maximum = Swift.max(maximum, value)
-        }
+extension Sample.Accumulator {
 
-        /// Merges two accumulators (the monoid operation).
-        @inlinable
-        public func merged(with other: Self) -> Self {
-            .init(
-                count: count &+ other.count,
-                sum: sum &+ other.sum,
-                minimum: Swift.min(minimum, other.minimum),
-                maximum: Swift.max(maximum, other.maximum)
-            )
-        }
+    /// The empty accumulator (identity element for the monoid).
+    @inlinable
+    public static var empty: Self {
+        .init(count: 0, sum: 0, minimum: .max, maximum: 0)
+    }
 
-        /// The arithmetic mean (integer division), or `nil` if empty.
-        @inlinable
-        public var mean: UInt64? {
-            guard count > 0 else { return nil }
-            return sum / count
-        }
+    /// Records a single value.
+    @inlinable
+    public mutating func record(_ value: UInt64) {
+        count &+= 1
+        sum &+= value
+        minimum = Swift.min(minimum, value)
+        maximum = Swift.max(maximum, value)
+    }
+
+    /// Merges two accumulators (the monoid operation).
+    @inlinable
+    public func merged(with other: Self) -> Self {
+        .init(
+            count: count &+ other.count,
+            sum: sum &+ other.sum,
+            minimum: Swift.min(minimum, other.minimum),
+            maximum: Swift.max(maximum, other.maximum)
+        )
+    }
+
+    /// The arithmetic mean (integer division), or `nil` if empty.
+    @inlinable
+    public var mean: UInt64? {
+        guard count > 0 else { return nil }
+        return sum / count
     }
 }

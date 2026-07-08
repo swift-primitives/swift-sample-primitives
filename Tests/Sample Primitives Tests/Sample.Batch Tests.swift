@@ -2,10 +2,10 @@ import Sample_Primitives
 import Testing
 
 @Suite
-struct SampleBatchTests {
+struct `Sample Batch Tests` {
 
     @Test
-    func emptyBatch() {
+    func `empty batch`() {
         let batch = Sample.Batch<Double>([], sortedBy: .ascending)
         #expect(batch.count == 0)
         #expect(batch.isEmpty)
@@ -16,7 +16,7 @@ struct SampleBatchTests {
     }
 
     @Test
-    func singleElement() {
+    func `single element`() {
         let batch = Sample.Batch([42.0])
         #expect(batch.count == 1)
         #expect(!batch.isEmpty)
@@ -26,7 +26,7 @@ struct SampleBatchTests {
     }
 
     @Test
-    func sortedOrder() {
+    func `sorted order`() {
         let batch = Sample.Batch([5, 3, 1, 4, 2])
         #expect(batch.min == 1)
         #expect(batch.max == 5)
@@ -43,7 +43,7 @@ struct SampleBatchTests {
     }
 
     @Test
-    func percentileNearestRank() {
+    func `percentile nearest rank`() {
         // 4 elements: indices 0,1,2,3
         let batch = Sample.Batch([1.0, 2.0, 3.0, 4.0])
         // p=0.5 → Int(4 * 0.5) = 2 → sorted[2] = 3.0
@@ -57,7 +57,7 @@ struct SampleBatchTests {
     }
 
     @Test
-    func borrowingAccessors() {
+    func `borrowing accessors`() {
         let batch = Sample.Batch(count: 3, sortedBy: .ascending) { i in
             [30, 10, 20][i]
         }
@@ -72,7 +72,7 @@ struct SampleBatchTests {
     }
 
     @Test
-    func customComparator() {
+    func `custom comparator`() {
         let batch = Sample.Batch([1.0, 2.0, 3.0, 4.0, 5.0], sortedBy: .descending)
         // Sorted descending: [5, 4, 3, 2, 1]
         // min/max return first/last in sorted order
@@ -83,7 +83,7 @@ struct SampleBatchTests {
     }
 
     @Test
-    func copyableSharing() {
+    func `copyable sharing`() {
         let batch1 = Sample.Batch([1.0, 2.0, 3.0])
         let batch2 = batch1
         #expect(batch1.count == batch2.count)

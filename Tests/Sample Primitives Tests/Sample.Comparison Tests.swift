@@ -2,10 +2,10 @@ import Sample_Primitives
 import Testing
 
 @Suite
-struct SampleComparisonTests {
+struct `Sample Comparison Tests` {
 
     @Test
-    func regressionDetectionLowerIsBetter() {
+    func `regression detection lower is better`() {
         let baseline = Sample.Batch([10.0, 20.0, 30.0])
         let current = Sample.Batch([15.0, 25.0, 35.0])
         let comparison = Sample.Comparison(
@@ -19,7 +19,7 @@ struct SampleComparisonTests {
     }
 
     @Test
-    func improvementDetectionLowerIsBetter() {
+    func `improvement detection lower is better`() {
         let baseline = Sample.Batch([10.0, 20.0, 30.0])
         let current = Sample.Batch([5.0, 15.0, 25.0])
         let comparison = Sample.Comparison(
@@ -33,7 +33,7 @@ struct SampleComparisonTests {
     }
 
     @Test
-    func regressionDetectionHigherIsBetter() {
+    func `regression detection higher is better`() {
         let baseline = Sample.Batch([100.0, 200.0, 300.0])
         let current = Sample.Batch([50.0, 150.0, 250.0])
         let comparison = Sample.Comparison(
@@ -47,7 +47,7 @@ struct SampleComparisonTests {
     }
 
     @Test
-    func changePercentage() {
+    func `change percentage`() {
         let baseline = Sample.Batch([100.0])
         let current = Sample.Batch([110.0])
         let comparison = Sample.Comparison(
@@ -62,7 +62,7 @@ struct SampleComparisonTests {
     }
 
     @Test
-    func exceedsTolerance() {
+    func `exceeds tolerance`() {
         let baseline = Sample.Batch([100.0])
         let current = Sample.Batch([115.0])
         let comparison = Sample.Comparison(
@@ -76,7 +76,7 @@ struct SampleComparisonTests {
     }
 
     @Test
-    func emptyBatchComparison() {
+    func `empty batch comparison`() {
         let baseline = Sample.Batch<Double>([], sortedBy: .ascending)
         let current = Sample.Batch<Double>([], sortedBy: .ascending)
         let comparison = Sample.Comparison(
@@ -91,7 +91,7 @@ struct SampleComparisonTests {
     }
 
     @Test
-    func metricExtraction() {
+    func `metric extraction`() {
         let batch = Sample.Batch([10.0, 20.0, 30.0, 40.0, 50.0])
         let minVal = Sample.Metric.min.extract(from: batch, using: .real)
         #expect(minVal == 10.0)
@@ -102,7 +102,7 @@ struct SampleComparisonTests {
     }
 
     @Test
-    func polarityCases() {
+    func `polarity cases`() {
         let lower: Sample.Polarity = .lowerIsBetter
         let higher: Sample.Polarity = .higherIsBetter
         #expect(lower != higher)

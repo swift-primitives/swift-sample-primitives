@@ -2,28 +2,28 @@ import Sample_Primitives
 import Testing
 
 @Suite
-struct SampleBatchCoefficientOfVariationTests {
+struct `Sample Batch Coefficient Of Variation Tests` {
 
     @Test
-    func emptyBatch() {
+    func `empty batch`() {
         let batch = Sample.Batch<Double>([], sortedBy: .ascending)
         #expect(batch.coefficientOfVariation == nil)
     }
 
     @Test
-    func singleElement() {
+    func `single element`() {
         let batch = Sample.Batch([42.0])
         #expect(batch.coefficientOfVariation == nil)
     }
 
     @Test
-    func uniformValues() {
+    func `uniform values`() {
         let batch = Sample.Batch([5.0, 5.0, 5.0, 5.0, 5.0])
         #expect(batch.coefficientOfVariation == 0.0)
     }
 
     @Test
-    func knownDistribution() {
+    func `known distribution`() {
         // Values: 10, 20, 30, 40, 50
         // Mean = 30. Sum of squared deviations = 1000.
         // Sample variance (n-1) = 250. StdDev = sqrt(250) ≈ 15.811.
@@ -34,7 +34,7 @@ struct SampleBatchCoefficientOfVariationTests {
     }
 
     @Test
-    func lowVariance() {
+    func `low variance`() {
         // Tight cluster: CV should be < 5%
         let batch = Sample.Batch([100.0, 101.0, 99.0, 100.5, 99.5])
         let cv = batch.coefficientOfVariation!
@@ -42,13 +42,13 @@ struct SampleBatchCoefficientOfVariationTests {
     }
 
     @Test
-    func durationConvenience() {
+    func `duration convenience`() {
         let batch = Sample.Batch<Duration>([.seconds(1), .seconds(1), .seconds(1)])
         #expect(batch.coefficientOfVariation == 0.0)
     }
 
     @Test
-    func durationWithVariance() {
+    func `duration with variance`() {
         let batch = Sample.Batch<Duration>([
             .seconds(10), .seconds(20), .seconds(30), .seconds(40), .seconds(50),
         ])
@@ -57,13 +57,13 @@ struct SampleBatchCoefficientOfVariationTests {
     }
 
     @Test
-    func zeroMean() {
+    func `zero mean`() {
         let batch = Sample.Batch([-1.0, 0.0, 1.0])
         #expect(batch.coefficientOfVariation == nil)
     }
 
     @Test
-    func genericWitness() {
+    func `generic witness`() {
         let batch = Sample.Batch([100, 200, 300, 400, 500])
         let cv = batch.coefficientOfVariation(using: .integer)
         #expect(cv != nil)
