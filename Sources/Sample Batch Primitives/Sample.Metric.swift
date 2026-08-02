@@ -7,7 +7,7 @@ extension Sample {
     ///
     /// Used with ``Comparison`` to specify which metric to compare between
     /// baseline and current batches.
-    public enum Metric: Swift.String, Sendable, Hashable, Codable {
+    public enum Metric: Swift.String, Sendable, Hashable {
         case min
         case max
         case median
@@ -20,6 +20,10 @@ extension Sample {
         case p999
     }
 }
+
+#if !hasFeature(Embedded)
+    extension Sample.Metric: Codable {}
+#endif
 
 extension Sample.Metric {
 
