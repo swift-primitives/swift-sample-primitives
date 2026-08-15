@@ -15,7 +15,6 @@ extension Sample.Batch where Element: Copyable {
         // reason: Last-index clamp `Swift.min(index, count − 1)` for percentile
         // nearest-rank algorithm; `count` is stdlib Int (storage size). Math
         // IS the length-minus-one expression.
-        // swiftlint:disable:next cardinal_count_minus_one_anti_pattern
         let clamped = Swift.min(index, count - 1)
         return unsafe self._storage.base[clamped]
     }
@@ -34,7 +33,6 @@ extension Sample.Batch where Element: Copyable {
         // reason: Pointer last-element access via `base[count − 1]`; canonical
         // UnsafePointer subscript / pointer-arithmetic pattern. `count` is
         // stdlib Int.
-        // swiftlint:disable:next cardinal_count_minus_one_anti_pattern
         return unsafe self._storage.base[count - 1]
     }
 

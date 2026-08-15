@@ -25,7 +25,6 @@ extension Sample.Batch where Element: Copyable & Sendable {
         // canonical statistics formula. `seconds` underlies stdlib types,
         // no typed Cardinal surface available. Math reads as math: n−1
         // IS the degrees-of-freedom expression.
-        // swiftlint:disable:next cardinal_count_minus_one_anti_pattern
         let variance = sumSquares / Double(count - 1)
         return averaging.embed(variance.squareRoot())
     }
