@@ -22,6 +22,6 @@ extension Sample.Batch where Element: Comparison.`Protocol` & SendableMetatype &
     /// Creates a batch from an array of values, sorted ascending.
     @inlinable
     public init(_ values: [Element]) {
-        self.init(values, sortedBy: .ascending)
+        self.init(values, sortedBy: Order.Comparator<Element>.ascending)
     }
 }
