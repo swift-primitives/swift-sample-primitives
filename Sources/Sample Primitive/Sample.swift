@@ -7,4 +7,5 @@
 /// - ``Comparison``: Regression comparison between two batches.
 /// - ``Polarity``: Direction indicator (lower-is-better vs higher-is-better).
 /// - ``Regression``: Ordinary least-squares linear regression.
+/// - ``Trend``: Statistical evidence about monotonic trend in an ordered sample.
 public enum Sample {}
