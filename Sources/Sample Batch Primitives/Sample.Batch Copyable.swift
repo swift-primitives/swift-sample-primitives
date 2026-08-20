@@ -17,7 +17,7 @@ extension Sample.Batch where Element: Copyable {
     }
 }
 
-extension Sample.Batch where Element: Comparison.`Protocol` & Copyable {
+extension Sample.Batch where Element: Comparison.`Protocol` & SendableMetatype & Copyable {
 
     /// Creates a batch from an array of values, sorted ascending.
     @inlinable
