@@ -25,17 +25,3 @@ extension Sample.Batch where Element: Comparison.`Protocol` & Copyable {
         self.init(values, sortedBy: .ascending)
     }
 }
-
-#if swift(<6.4)
-
-    extension Sample.Batch where Element: Swift.Comparable & Copyable {
-
-        /// Creates a batch from an array of stdlib-Comparable values, sorted ascending.
-        @_disfavoredOverload
-        @inlinable
-        public init(_ values: [Element]) {
-            self.init(values, sortedBy: .ascending)
-        }
-    }
-
-#endif
