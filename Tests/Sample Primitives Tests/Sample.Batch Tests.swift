@@ -44,15 +44,15 @@ struct `Sample Batch Tests` {
 
     @Test
     func `percentile nearest rank`() {
-        // 4 elements: indices 0,1,2,3
+
         let batch = Sample.Batch([1.0, 2.0, 3.0, 4.0])
-        // p=0.5 → Int(4 * 0.5) = 2 → sorted[2] = 3.0
+
         #expect(batch.percentile(0.5) == 3.0)
-        // p=0.25 → Int(4 * 0.25) = 1 → sorted[1] = 2.0
+
         #expect(batch.percentile(0.25) == 2.0)
-        // p=0.0 → Int(4 * 0.0) = 0 → sorted[0] = 1.0
+
         #expect(batch.percentile(0.0) == 1.0)
-        // p=1.0 → Int(4 * 1.0) = 4 → clamped to 3 → sorted[3] = 4.0
+
         #expect(batch.percentile(1.0) == 4.0)
     }
 
@@ -74,8 +74,7 @@ struct `Sample Batch Tests` {
     @Test
     func `custom comparator`() {
         let batch = Sample.Batch([1.0, 2.0, 3.0, 4.0, 5.0], sortedBy: .descending)
-        // Sorted descending: [5, 4, 3, 2, 1]
-        // min/max return first/last in sorted order
+
         #expect(batch.min == 5.0)
         #expect(batch.max == 1.0)
         #expect(batch.percentile(0.0) == 5.0)

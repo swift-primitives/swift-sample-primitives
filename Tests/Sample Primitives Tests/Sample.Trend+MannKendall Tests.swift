@@ -1,10 +1,3 @@
-//
-//  Sample.Trend+MannKendall Tests.swift
-//  swift-sample-primitives
-//
-//  Mann–Kendall evidence tests.
-//
-
 import Sample_Primitives
 import Testing
 

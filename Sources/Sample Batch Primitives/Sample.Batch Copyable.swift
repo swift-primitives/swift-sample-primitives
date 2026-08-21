@@ -4,7 +4,6 @@ public import Sample_Primitive
 
 extension Sample.Batch where Element: Copyable {
 
-    /// Creates a batch from an array of values, sorted by the given comparator.
     @inlinable
     public init(_ values: [Element], sortedBy comparator: Order.Comparator<Element>) {
         let sorted = values.sorted { comparator($0, $1).isLess }
@@ -19,7 +18,6 @@ extension Sample.Batch where Element: Copyable {
 
 extension Sample.Batch where Element: Comparison.`Protocol` & SendableMetatype & Copyable {
 
-    /// Creates a batch from an array of values, sorted ascending.
     @inlinable
     public init(_ values: [Element]) {
         self.init(values, sortedBy: Order.Comparator<Element>.ascending)

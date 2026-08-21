@@ -1,23 +1,5 @@
-// ===----------------------------------------------------------------------===//
-//
-// This source file is part of the swift-primitives open source project
-//
-// Copyright (c) 2024-2026 Coen ten Thije Boonkkamp and the swift-primitives project authors
-// Licensed under Apache License v2.0
-//
-// See LICENSE for license information
-//
-// ===----------------------------------------------------------------------===//
-
 extension Sample.Trend {
-    /// Computes Mann–Kendall trend evidence for an ordered sequence.
-    ///
-    /// Non-finite projected values are excluded and reported by
-    /// ``excluded``. Tied observations contribute to the variance
-    /// correction. The sequence's iteration order is the observation order.
-    // swift-linter:disable:next compound identifier
-    // REASON: Mann–Kendall is the externally standardized statistical test
-    // whose spelling this operation preserves for traceability.
+
     public static func mannKendall<Observations: Swift.Sequence>(
         _ observations: Observations,
         value: (Observations.Element) -> Double

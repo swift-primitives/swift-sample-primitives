@@ -38,8 +38,6 @@ struct `Sample Accumulator Tests` {
         #expect(acc.mean == 42)
     }
 
-    // MARK: - Monoid laws
-
     @Test
     func `monoid identity left`() {
         var acc = Sample.Accumulator.empty

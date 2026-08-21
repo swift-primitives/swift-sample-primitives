@@ -24,10 +24,7 @@ struct `Sample Batch Coefficient Of Variation Tests` {
 
     @Test
     func `known distribution`() {
-        // Values: 10, 20, 30, 40, 50
-        // Mean = 30. Sum of squared deviations = 1000.
-        // Sample variance (n-1) = 250. StdDev = sqrt(250) ≈ 15.811.
-        // CV = 15.811 / 30 * 100 ≈ 52.705%.
+
         let batch = Sample.Batch([10.0, 20.0, 30.0, 40.0, 50.0])
         let cv = batch.coefficientOfVariation!
         #expect(abs(cv - 52.705) < 0.01)
@@ -35,7 +32,7 @@ struct `Sample Batch Coefficient Of Variation Tests` {
 
     @Test
     func `low variance`() {
-        // Tight cluster: CV should be < 5%
+
         let batch = Sample.Batch([100.0, 101.0, 99.0, 100.5, 99.5])
         let cv = batch.coefficientOfVariation!
         #expect(cv < 5.0)

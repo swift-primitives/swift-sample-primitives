@@ -1,10 +1,3 @@
-//
-//  Sample.Regression Tests.swift
-//  swift-sample-primitives
-//
-//  Unit tests for OLS linear regression.
-//
-
 import Sample_Primitives
 import Testing
 
@@ -15,13 +8,11 @@ struct `Sample Regression Tests` {
     @Suite struct `Edge Case` {}
 }
 
-// MARK: - Unit
-
 extension `Sample Regression Tests`.Unit {
 
     @Test
     func `perfect linear fit`() {
-        // y = 2x + 1
+
         let x = [1.0, 2.0, 3.0, 4.0, 5.0]
         let y = [3.0, 5.0, 7.0, 9.0, 11.0]
         let fit = Sample.Regression.linear(x: x, y: y)
@@ -34,7 +25,7 @@ extension `Sample Regression Tests`.Unit {
 
     @Test
     func `perfect fit through origin`() {
-        // y = 3x
+
         let x = [1.0, 2.0, 3.0, 4.0]
         let y = [3.0, 6.0, 9.0, 12.0]
         let fit = Sample.Regression.linear(x: x, y: y)
@@ -46,7 +37,7 @@ extension `Sample Regression Tests`.Unit {
 
     @Test
     func `negative slope`() {
-        // y = -2x + 10
+
         let x = [1.0, 2.0, 3.0, 4.0, 5.0]
         let y = [8.0, 6.0, 4.0, 2.0, 0.0]
         let fit = Sample.Regression.linear(x: x, y: y)
@@ -77,8 +68,6 @@ extension `Sample Regression Tests`.Unit {
         #expect(abs(fit.intercept - 7.0) < 1e-10)
     }
 }
-
-// MARK: - Edge Case
 
 extension `Sample Regression Tests`.`Edge Case` {
 

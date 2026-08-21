@@ -3,15 +3,6 @@ public import Sample_Primitive
 
 extension Sample.Batch where Element: ~Copyable {
 
-    /// Creates a batch from elements produced by a closure, sorted by the given comparator.
-    ///
-    /// Elements are initialized into a contiguous buffer and sorted in-place
-    /// using move semantics, supporting `~Copyable` element types.
-    ///
-    /// - Parameters:
-    ///   - count: The number of elements to produce.
-    ///   - comparator: Order comparator for sorting elements.
-    ///   - body: Closure called with each index `0..<count` to produce an element.
     @inlinable
     public init(
         count: Int,
@@ -26,12 +17,6 @@ extension Sample.Batch where Element: ~Copyable {
         self._storage = unsafe _SampleBatchStorage(base: pointer, count: count)
     }
 
-    /// Borrows the element at the given percentile position.
-    ///
-    /// - Parameters:
-    ///   - p: Percentile in `0.0...1.0`.
-    ///   - body: Closure receiving a borrow of the element.
-    /// - Returns: The result of `body`, or `nil` if the batch is empty.
     @inlinable
     public borrowing func withPercentile<R: ~Copyable>(
         _ p: Double,
@@ -39,31 +24,24 @@ extension Sample.Batch where Element: ~Copyable {
     ) -> R? {
         guard count > 0 else { return nil }
         let index = Int(Double(count) * p)
-        // reason: Last-index clamp `Swift.min(index, count − 1)` for percentile
-        // nearest-rank algorithm; `count` is stdlib Int (storage size). Math
-        // IS the length-minus-one expression.
+
         let clamped = Swift.min(index, count - 1)
         return unsafe body((self._storage.base + clamped).pointee)
     }
 
-    /// Borrows the minimum element (first in sorted order).
     @inlinable
     public borrowing func withMin<R: ~Copyable>(_ body: (borrowing Element) -> R) -> R? {
         guard count > 0 else { return nil }
         return unsafe body(self._storage.base.pointee)
     }
 
-    /// Borrows the maximum element (last in sorted order).
     @inlinable
     public borrowing func withMax<R: ~Copyable>(_ body: (borrowing Element) -> R) -> R? {
         guard count > 0 else { return nil }
-        // reason: Pointer last-element access via `base + count − 1`; canonical
-        // pointer-arithmetic pattern for last element of a contiguous buffer.
-        // `count` is stdlib Int.
+
         return unsafe body((self._storage.base + count - 1).pointee)
     }
 
-    /// Borrows the median element.
     @inlinable
     public borrowing func withMedian<R: ~Copyable>(_ body: (borrowing Element) -> R) -> R? {
         withPercentile(0.5, body)

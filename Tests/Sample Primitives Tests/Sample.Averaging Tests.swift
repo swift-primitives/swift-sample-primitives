@@ -40,7 +40,7 @@ struct `Sample Averaging Tests` {
         let batch = Sample.Batch([2.0, 4.0, 4.0, 4.0, 5.0, 5.0, 7.0, 9.0])
         let stddev = batch.standardDeviation
         #expect(stddev != nil)
-        // mean = 5.0, sample variance (Bessel's) = 32/7, stddev = sqrt(32/7) ≈ 2.138
+
         let expected = (32.0 / 7.0).squareRoot()
         #expect(abs(stddev! - expected) < 0.001)
     }

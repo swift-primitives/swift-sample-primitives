@@ -4,39 +4,19 @@ public import Sample_Primitive
 
 extension Sample {
 
-    /// Value witness for computing statistics over a collection of elements.
-    ///
-    /// Captures the operations needed for averaging and real-number projection:
-    /// - `zero`: The additive identity.
-    /// - `adding`: Binary addition.
-    /// - `dividing`: Division by an integer count.
-    /// - `project`: Project element to `Double` for floating-point computation.
-    /// - `embed`: Embed `Double` result back into the element type.
-    ///
-    /// Static factories are provided for common types:
-    /// ```swift
-    /// sample.mean(using: .duration)               // Duration
-    /// sample.standardDeviation(using: .real)       // Double
-    /// ```
     @frozen
     public struct Averaging<Element>: Witness.`Protocol` {
 
-        /// The additive identity element.
         public var zero: Element
 
-        /// Binary addition operation.
         public var adding: @Sendable (Element, Element) -> Element
 
-        /// Division by an integer count.
         public var dividing: @Sendable (Element, Int) -> Element
 
-        /// Project element to `Double` for floating-point computation.
         public var project: @Sendable (Element) -> Double
 
-        /// Embed `Double` result back into the element type.
         public var embed: @Sendable (Double) -> Element
 
-        /// Creates an averaging witness from its zero, addition, division, projection, and embedding operations.
         @inlinable
         public init(
             zero: Element,
@@ -54,15 +34,10 @@ extension Sample {
     }
 }
 
-// MARK: - Sendable
-
 extension Sample.Averaging: Sendable where Element: Sendable {}
-
-// MARK: - Static factories
 
 extension Sample.Averaging where Element == Duration {
 
-    /// Averaging witness for `Duration`.
     @inlinable
     public static var duration: Self {
         .init(
@@ -77,7 +52,6 @@ extension Sample.Averaging where Element == Duration {
 
 extension Sample.Averaging where Element == Double {
 
-    /// Averaging witness for `Double`.
     @inlinable
     public static var real: Self {
         .init(
@@ -92,7 +66,6 @@ extension Sample.Averaging where Element == Double {
 
 extension Sample.Averaging where Element == Int {
 
-    /// Averaging witness for `Int` (integer division).
     @inlinable
     public static var integer: Self {
         .init(
@@ -107,7 +80,6 @@ extension Sample.Averaging where Element == Int {
 
 extension Sample.Averaging where Element == UInt64 {
 
-    /// Averaging witness for `UInt64`.
     @inlinable
     public static var natural: Self {
         .init(

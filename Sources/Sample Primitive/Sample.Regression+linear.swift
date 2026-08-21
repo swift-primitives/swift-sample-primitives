@@ -1,23 +1,5 @@
-//
-//  Sample.Regression+linear.swift
-//  swift-sample-primitives
-//
-//  Ordinary least-squares linear regression.
-//
-
 extension Sample.Regression {
-    /// Computes an ordinary least-squares linear regression: y ≈ slope·x + intercept.
-    ///
-    /// Uses the closed-form normal equation solution:
-    /// - slope = (n·Σxᵢyᵢ - Σxᵢ·Σyᵢ) / (n·Σxᵢ² - (Σxᵢ)²)
-    /// - intercept = (Σyᵢ - slope·Σxᵢ) / n
-    /// - R² = 1 - SS_res / SS_tot
-    ///
-    /// - Parameters:
-    ///   - x: Predictor values.
-    ///   - y: Response values.
-    /// - Precondition: `x` and `y` must have equal length ≥ 2.
-    /// - Returns: A ``Fit`` containing slope, intercept, R², and MSE.
+
     public static func linear(x: [Double], y: [Double]) -> Fit {
         precondition(x.count == y.count, "x and y must have the same length")
         precondition(x.count >= 2, "Need at least 2 data points for linear regression")
@@ -37,7 +19,7 @@ extension Sample.Regression {
 
         let denominator = n * sumXX - sumX * sumX
         guard denominator != 0 else {
-            // All x values are identical — no slope can be estimated.
+
             return Fit(
                 slope: 0,
                 intercept: sumY / n,
@@ -49,7 +31,6 @@ extension Sample.Regression {
         let slope = (n * sumXY - sumX * sumY) / denominator
         let intercept = (sumY - slope * sumX) / n
 
-        // Compute R² and MSE
         let yMean = sumY / n
         var ssRes: Double = 0
         var ssTot: Double = 0
@@ -63,7 +44,7 @@ extension Sample.Regression {
         }
 
         let rSquared = ssTot > 0 ? 1.0 - ssRes / ssTot : 0.0
-        // MSE with n-2 degrees of freedom (2 estimated parameters)
+
         let mse = x.count > 2 ? ssRes / Double(x.count - 2) : ssRes
 
         return Fit(

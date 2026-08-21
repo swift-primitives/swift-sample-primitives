@@ -12,13 +12,12 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-        // MARK: - Namespace
+
         .library(
             name: "Sample Primitive",
             targets: ["Sample Primitive"]
         ),
 
-        // MARK: - Sub-namespaces
         .library(
             name: "Sample Averaging Primitives",
             targets: ["Sample Averaging Primitives"]
@@ -32,13 +31,11 @@ let package = Package(
             targets: ["Sample Batch Primitives"]
         ),
 
-        // MARK: - Umbrella
         .library(
             name: "Sample Primitives",
             targets: ["Sample Primitives"]
         ),
 
-        // MARK: - Test Support
         .library(
             name: "Sample Primitives Test Support",
             targets: ["Sample Primitives Test Support"]
@@ -67,13 +64,12 @@ let package = Package(
         ),
     ],
     targets: [
-        // MARK: - Namespace
+
         .target(
             name: "Sample Primitive",
             dependencies: []
         ),
 
-        // MARK: - Sub-namespaces
         .target(
             name: "Sample Averaging Primitives",
             dependencies: [
@@ -99,7 +95,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Umbrella
         .target(
             name: "Sample Primitives",
             dependencies: [
@@ -110,7 +105,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Test Support
         .target(
             name: "Sample Primitives Test Support",
             dependencies: [
